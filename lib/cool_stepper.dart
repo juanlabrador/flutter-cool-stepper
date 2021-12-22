@@ -147,30 +147,44 @@ class _CoolStepperState extends State<CoolStepper> {
 
     final buttons = topElevation(Container(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          TextButton(
-            onPressed: onStepBack,
-            child: Text(
-              getPrevLabel(),
-              style:
-                  widget.config.stepTextStyle ?? TextStyle(color: Colors.grey),
-            ),
-          ),
-          counter,
-          TextButton(
-            onPressed: onStepNext,
-            child: Text(
-              getNextLabel(),
-              style: widget.config.nextTextStyle ??
-                  TextStyle(
-                    color: Colors.green,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                width: double.maxFinite,
+                alignment: Alignment.centerLeft,
+                child: TextButton(
+                  onPressed: onStepBack,
+                  child: Text(
+                    getPrevLabel(),
+                    textAlign: TextAlign.start,
+                    style: widget.config.stepTextStyle ??
+                        TextStyle(color: Colors.grey),
                   ),
+                ),
+              ),
             ),
-          ),
-        ],
+            counter,
+            Expanded(
+              child: Container(
+                width: double.maxFinite,
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: onStepNext,
+                  child: Text(
+                    getNextLabel(),
+                    textAlign: TextAlign.end,
+                    style: widget.config.nextTextStyle ??
+                        TextStyle(
+                          color: Colors.green,
+                        ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
 
     return Container(
       child: Column(
