@@ -3,11 +3,10 @@ library cool_stepper;
 export 'package:cool_stepper/src/models/cool_step.dart';
 export 'package:cool_stepper/src/models/cool_stepper_config.dart';
 
-import 'package:another_flushbar/flushbar.dart';
-
 import 'package:cool_stepper/src/models/cool_step.dart';
 import 'package:cool_stepper/src/models/cool_stepper_config.dart';
 import 'package:cool_stepper/src/widgets/cool_stepper_view.dart';
+import 'package:cool_stepper/src/widgets/shadow.dart';
 import 'package:flutter/material.dart';
 
 /// CoolStepper
@@ -26,18 +25,12 @@ class CoolStepper extends StatefulWidget {
   /// CoolStepper config
   final CoolStepperConfig config;
 
-  /// This determines if or not a snackbar displays your error message if validation fails
-  ///
-  /// default is false
-  final bool showErrorSnackbar;
-
   const CoolStepper({
     Key? key,
     required this.steps,
     required this.onCompleted,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 20.0),
+    this.contentPadding = const EdgeInsets.symmetric(horizontal: 15),
     this.config = const CoolStepperConfig(),
-    this.showErrorSnackbar = false,
   }) : super(key: key);
 
   @override
@@ -86,27 +79,6 @@ class _CoolStepperState extends State<CoolStepper> {
       } else {
         widget.onCompleted();
       }
-    } else {
-      /// [showErrorSnackbar] is true, Show error snackbar rule
-      if (widget.showErrorSnackbar) {
-        final flush = Flushbar(
-          message: validation,
-          flushbarStyle: FlushbarStyle.FLOATING,
-          margin: EdgeInsets.all(8.0),
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-          icon: Icon(
-            Icons.info_outline,
-            size: 28.0,
-            color: Theme.of(context).primaryColor,
-          ),
-          duration: Duration(seconds: 2),
-          leftBarIndicatorColor: Theme.of(context).primaryColor,
-        );
-        flush.show(context);
-
-        // final snackBar = SnackBar(content: Text(validation));
-        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
     }
   }
 
@@ -138,9 +110,10 @@ class _CoolStepperState extends State<CoolStepper> {
     final counter = Container(
       child: Text(
         "${widget.config.stepText ?? 'STEP'} ${currentStep + 1} ${widget.config.ofText ?? 'OF'} ${widget.steps.length}",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
+        style: widget.config.stepTextStyle ??
+            TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
       ),
     );
 
@@ -172,7 +145,7 @@ class _CoolStepperState extends State<CoolStepper> {
       return backLabel;
     }
 
-    final buttons = Container(
+    final buttons = topElevation(Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -180,7 +153,8 @@ class _CoolStepperState extends State<CoolStepper> {
             onPressed: onStepBack,
             child: Text(
               getPrevLabel(),
-              style: TextStyle(color: Colors.grey),
+              style:
+                  widget.config.stepTextStyle ?? TextStyle(color: Colors.grey),
             ),
           ),
           counter,
@@ -188,14 +162,15 @@ class _CoolStepperState extends State<CoolStepper> {
             onPressed: onStepNext,
             child: Text(
               getNextLabel(),
-              style: TextStyle(
-                color: Colors.green,
-              ),
+              style: widget.config.nextTextStyle ??
+                  TextStyle(
+                    color: Colors.green,
+                  ),
             ),
           ),
         ],
       ),
-    );
+    ));
 
     return Container(
       child: Column(

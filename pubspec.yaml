@@ -10,8 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  another_flushbar: ^1.10.18
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

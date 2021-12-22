@@ -103,7 +103,6 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     final stepper = CoolStepper(
-      showErrorSnackbar: false,
       onCompleted: () {
         print('Steps completed!');
       },
@@ -129,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
     TextEditingController? controller,
   }) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0),
+      padding: const EdgeInsets.only(bottom: 10),
       child: TextFormField(
         decoration: InputDecoration(
           labelText: labelText,

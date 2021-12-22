@@ -29,8 +29,14 @@ class CoolStepperConfig {
   /// [This does not apply when icon is set]
   final Color? iconColor;
 
-  /// This icon replaces the default icon
-  final Icon? icon;
+  /// This is the textStyle for the step text
+  final TextStyle? stepTextStyle;
+
+  /// This is the textStyle for the next text
+  final TextStyle? nextTextStyle;
+
+  /// This is the textStyle for the back text
+  final TextStyle? backTextStyle;
 
   /// This is the textStyle for the title text
   final TextStyle? titleTextStyle;
@@ -62,9 +68,11 @@ class CoolStepperConfig {
     this.ofText = 'OF',
     this.headerColor,
     this.iconColor,
-    this.icon,
     this.titleTextStyle,
     this.subtitleTextStyle,
+    this.nextTextStyle,
+    this.backTextStyle,
+    this.stepTextStyle,
     this.backTextList,
     this.nextTextList,
     this.finalText = 'FINISH',
