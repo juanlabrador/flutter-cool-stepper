@@ -20,7 +20,6 @@ class CoolStepperView extends StatelessWidget {
     final title = config!.isHeaderEnabled && step.isHeaderEnabled
         ? Container(
             width: double.maxFinite,
-            margin: EdgeInsets.only(bottom: 5),
             padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
               color: config!.headerColor ??
@@ -65,6 +64,7 @@ class CoolStepperView extends StatelessWidget {
 
     final content = Expanded(
       child: SingleChildScrollView(
+        padding: EdgeInsets.only(top: 10, bottom: 10),
         child: step.content,
       ),
     );
