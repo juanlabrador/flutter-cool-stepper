@@ -19,9 +19,6 @@ class CoolStepper extends StatefulWidget {
   /// Actions to take when the final stepper is passed
   final VoidCallback onCompleted;
 
-  /// Padding for the content inside the stepper
-  final EdgeInsetsGeometry contentPadding;
-
   /// CoolStepper config
   final CoolStepperConfig config;
 
@@ -29,7 +26,6 @@ class CoolStepper extends StatefulWidget {
     Key? key,
     required this.steps,
     required this.onCompleted,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 15),
     this.config = const CoolStepperConfig(),
   }) : super(key: key);
 
@@ -100,7 +96,6 @@ class _CoolStepperState extends State<CoolStepper> {
         children: widget.steps.map((step) {
           return CoolStepperView(
             step: step,
-            contentPadding: widget.contentPadding,
             config: widget.config,
           );
         }).toList(),

@@ -5,7 +5,6 @@ class CoolStepperView extends StatelessWidget {
   final CoolStep step;
   final VoidCallback? onStepNext;
   final VoidCallback? onStepBack;
-  final EdgeInsetsGeometry? contentPadding;
   final CoolStepperConfig? config;
 
   const CoolStepperView({
@@ -13,7 +12,6 @@ class CoolStepperView extends StatelessWidget {
     required this.step,
     this.onStepNext,
     this.onStepBack,
-    this.contentPadding,
     required this.config,
   }) : super(key: key);
 
@@ -23,7 +21,7 @@ class CoolStepperView extends StatelessWidget {
         ? Container(
             width: double.maxFinite,
             margin: EdgeInsets.only(bottom: 5),
-            padding: EdgeInsets.only(top: 15, bottom: 15),
+            padding: EdgeInsets.all(15),
             decoration: BoxDecoration(
               color: config!.headerColor ??
                   Theme.of(context).primaryColor.withOpacity(0.1),
@@ -67,7 +65,6 @@ class CoolStepperView extends StatelessWidget {
 
     final content = Expanded(
       child: SingleChildScrollView(
-        padding: contentPadding,
         child: step.content,
       ),
     );
